@@ -74,7 +74,7 @@ docker_runtime_directory: ""
 # https://bugs.launchpad.net/ubuntu/+source/python-setuptools/+bug/1774419.
 easy_install_available: >-
   {{ ansible_distribution != 'Ubuntu' or
-     ansible_distribution_major_version | version_compare(18, 'lt') }}
+     ansible_distribution_major_version is version(18, 'lt') }}
 
 # Ubuntu 18+ bundles nfs-ganesha 2.6.0 with Ceph Mimic packages,
 # which does udp rpcbind test even with NFSv3 disabled - therefore
