@@ -4,7 +4,7 @@
   register: result
   changed_when: false
   when: inventory_hostname in groups['baremetal']
-  failed_when: result | failed
+  failed_when: result is failed
                or result.stdout | regex_replace('.*(\\d+\\.\\d+\\.\\d+).*', '\\1') is version(docker_version_min, '<')
 
 # NOTE(mgoddard): If passwords.yml is encrypted using ansible-vault, this check
@@ -15,7 +15,7 @@
   run_once: True
   register: result
   changed_when: false
-  failed_when: result.stdout | regex_replace('(.*ssh_key.*)', '') | search(":")
+  failed_when: result.stdout | regex_replace('(.*ssh_key.*)', '') is search(":")
 
 - name: Check if nscd is running
   command: pgrep nscd

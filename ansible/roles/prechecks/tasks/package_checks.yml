@@ -4,7 +4,7 @@
   register: result
   changed_when: false
   when: inventory_hostname in groups['baremetal']
-  failed_when: result | failed or
+  failed_when: result is failed or
                result.stdout is version(docker_py_version_min, '<')
 
 - name: Checking Ansible version
